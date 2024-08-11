@@ -6,10 +6,10 @@ import './App.css'
 function App() {
   const [count, setCount] = useState('')
   async function handleClick () {
-    await fetch('', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({hello: 'hi'})}).then((res) => {res.json()}).then((data) => setCount(data.recieved))
+    await 
   }
 
-  return (
+  return (fetch('https://testbackend2123-c5ddevbvckemdvgd.eastus-01.azurewebsites.net', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({hello: 'hi'})}).then((res) => {res.json()}).then((data) => setCount(data.recieved))
     <>
       <button onClick={handleClick}>Press</button>
     </>
