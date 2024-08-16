@@ -18,7 +18,7 @@ function App() {
   }
   */
   return (
-    <RouterProvider  router={router}/>
+    <button onClick={handleClick}>Press.</button>
   )
 }
 
