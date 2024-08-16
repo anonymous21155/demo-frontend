@@ -2,7 +2,7 @@ import React from 'react';
 
 function Hlo () {
     return (
-        <p>This site is developed by Gokul.</p>
+        <p>This site is developed by Gokul....</p>
     )
 }
 
