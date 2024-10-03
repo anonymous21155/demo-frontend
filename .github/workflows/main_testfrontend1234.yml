@@ -18,15 +18,6 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: Export environment variables from Azure App Service
-        run: |
-          echo "VITE_API_URL=123456" > .env   # Use '>' instead of '>>' to ensure clean creation.
-          echo "NODE_ENV=production" >> .env  # Add any other env variables you need.
-        
-
-      - name: Check if .env exists
-        run: |
-          cat .env  # To verify that .env file is created properly.
         
 
       - name: npm install, build, and test
