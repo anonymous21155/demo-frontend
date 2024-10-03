@@ -22,12 +22,12 @@ jobs:
         run: |
           echo "VITE_API_URL=123456" > .env   # Use '>' instead of '>>' to ensure clean creation.
           echo "NODE_ENV=production" >> .env  # Add any other env variables you need.
-        displayName: 'Creating .env file'
+        
 
       - name: Check if .env exists
         run: |
           cat .env  # To verify that .env file is created properly.
-        displayName: 'Check .env file'
+        
 
       - name: npm install, build, and test
         run: |
