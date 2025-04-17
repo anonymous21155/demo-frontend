@@ -14,7 +14,7 @@ variables:
   imageRepository: 'anonymousdemofrontend'
   containerRegistry: 'mcrlglregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
+  tag: 'new'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
