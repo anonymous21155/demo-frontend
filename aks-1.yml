@@ -1,0 +1,42 @@
+trigger:
+ paths:
+   include:
+   - kubernetes/myapp
+   
+pool:
+  vmImage: "Windows-Latest"
+
+stages:
+- stage: deploy
+  jobs:
+  - deployment: d1
+    environment: 'anonymous21155demofrontend'
+    strategy:
+     runOnce:
+       deploy:
+         steps: 
+         - task: KubernetesManifest@1
+
+           inputs:
+             action: 'createSecret'
+             connectionType: 'azureResourceManager'
+             azureSubscriptionConnection: 'myConnectionString'
+             azureResourceGroup: 'RG-44'
+             kubernetesCluster: 'gokulakscluster'
+             useClusterAdmin: true
+             namespace: 'default'
+             secretType: 'dockerRegistry'
+             secretName: 'mysecret'
+             dockerRegistryEndpoint: 'mcrlglregistry'
+         - task: KubernetesManifest@1
+           inputs:
+             action: 'deploy'
+             connectionType: 'azureResourceManager'
+             azureSubscriptionConnection: 'myConnectionString'
+             azureResourceGroup: 'RG-44'
+             kubernetesCluster: 'gokulakscluster'
+             namespace: 'default'
+             manifests: |
+               '$(Pipeline.Workspace)/kubernetes/myapp/deployment.yml'
+               '$(Pipeline.Workspace)/kubernetes/myapp/service.yml'
+             imagePullSecrets: 'mysecret'
