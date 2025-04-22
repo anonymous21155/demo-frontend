@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appname: myapp
+  template:
+    metadata:
+      labels:
+        appname: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: mcrlglregistry.azurecr.io/anonymousdemofrontend:new
+          ports:
+          - containerPort: 5173
+      imagePullSecrets:
+      - name: mysecret
