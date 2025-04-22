@@ -15,6 +15,7 @@ stages:
      runOnce:
        deploy:
          steps: 
+         - checkout: self
          - script: |
              echo "Listing contents of kubernetes/myapp:"
              dir "$(Build.SourcesDirectory)\
