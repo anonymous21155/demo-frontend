@@ -14,7 +14,7 @@ variables:
   imageRepository: 'anonymousdemofrontend'
   containerRegistry: 'mcrlglregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: 'new'
+  tag: '$(Build.BuildId)'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -37,3 +37,18 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+
+    - task: KubernetesManifest@1
+      inputs:
+        action: 'deploy'
+        connectionType: 'azureResourceManager'
+        azureSubscriptionConnection: 'myConnectionString'
+        azureResourceGroup: 'RG-44'
+        kubernetesCluster: 'gokulakscluster'
+        useClusterAdmin: true
+        namespace: 'default'
+        manifests: |
+          '$(Build.SourcesDirectory)/kubernetes/myapp/deployment.yml'
+          '$(Build.SourcesDirectory)/kubernetes/myapp/service.yml'
+        containers: 'mcrlglregistry.azurecr.io/anonymousdemofrontend:$(Build.BuildId)'
+        imagePullSecrets: 'mysecret'
