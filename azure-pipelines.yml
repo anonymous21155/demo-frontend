@@ -48,7 +48,7 @@ stages:
         useClusterAdmin: true
         namespace: 'default'
         manifests: |
-          '$(Build.SourcesDirectory)/kubernetes/myapp/deployment.yml'
-          '$(Build.SourcesDirectory)/kubernetes/myapp/service.yml'
+          $(Build.SourcesDirectory)/kubernetes/myapp/deployment.yml
+          $(Build.SourcesDirectory)/kubernetes/myapp/service.yml
         containers: 'mcrlglregistry.azurecr.io/anonymousdemofrontend:$(Build.BuildId)'
         imagePullSecrets: 'mysecret'
