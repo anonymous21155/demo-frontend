@@ -25,6 +25,6 @@ stages:
              kubernetesCluster: 'gokulakscluster'
              namespace: 'default'
              manifests: |
-               '$(Build.SourcesDirectory)/kubernetes/myapp/deployment.yml'
-               '$(Build.SourcesDirectory)/kubernetes/myapp/service.yml'
+               $(Build.SourcesDirectory)/kubernetes/myapp/deployment.yml
+               $(Build.SourcesDirectory)/kubernetes/myapp/service.yml
              imagePullSecrets: 'mysecret'
