@@ -2,14 +2,17 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
 
-// Load environment variables from .env file
 dotenv.config();
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    host: '0.0.0.0',  // 👈 this is the key line to allow external access
+    port: 5173
+  },
   build: {
     rollupOptions: {
-      // Remove the `external` option or only use it if you have a specific reason.
+      // external: [], // (if you ever use it)
     }
   },
   define: {
@@ -18,4 +21,3 @@ export default defineConfig({
     }
   }  
 });
-
