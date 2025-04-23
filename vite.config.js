@@ -6,6 +6,7 @@ dotenv.config();
 
 export default defineConfig({
   plugins: [react()],
+  base: '/home/',
   server: {
     host: '0.0.0.0',  // 👈 this is the key line to allow external access
     port: 5173
