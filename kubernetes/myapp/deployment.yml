@@ -18,6 +18,12 @@ spec:
           image: mcrlglregistry.azurecr.io/anonymousdemofrontend:new
           ports:
             - containerPort: 5173
+          volumeMounts:
+            - name: mypv
+              mountPath: /data
       imagePullSecrets:
       - name: mysecret
+      volumes: 
+        - name: mypv
+          persistentVolumeClaim: azure-managed-disk
           
