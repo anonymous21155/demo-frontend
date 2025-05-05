@@ -50,5 +50,8 @@ stages:
         manifests: |
           $(Build.SourcesDirectory)/kubernetes/myapp/deployment.yml
           $(Build.SourcesDirectory)/kubernetes/myapp/service.yml
+          $(Build.SourcesDirectory)/kubernetes/myapp/ingress.yaml
+          $(Build.SourcesDirectory)/kubernetes/myapp/simplifiedingress.yaml
+          $(Build.SourcesDirectory)/kubernetes/myapp/pv-pvc.yml
         containers: 'mcrlglregistry.azurecr.io/anonymousdemofrontend:$(Build.BuildId)'
         imagePullSecrets: 'mysecret'
