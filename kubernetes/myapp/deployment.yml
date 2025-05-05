@@ -1,22 +1,26 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: myapp
+  name: myapp-ingress
   namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      appname: myapp
-  template:
-    metadata:
-      labels:
-        appname: myapp
-    spec:
-      containers:
-        - name: myapp
-          image: mcrlglregistry.azurecr.io/anonymousdemofrontend:new
-          ports:
-          - containerPort: 5173
-      imagePullSecrets:
-      - name: mysecret
+  ingressClassName: nginx
+  rules: 
+  - http:
+      paths:
+      - path: /app1(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: myservice
+            port:
+              number: 80
+      - path: /app2(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: store-front
+            port: 
+              number: 80
